@@ -9,4 +9,4 @@ services:
       - "LOGSTASH_ENABLED=false"
       - "SERVICE_NAME=google_dyn_dns"
       - "SERVICE_443_CHECK_HTTPS=/health"
-      - "SERVICE_TAGS=traefik.enable=true"
+      - "SERVICE_TAGS=traefik.enable=false"
