@@ -62,8 +62,10 @@ class GoogleDynDNSThread
           sleep(config.sleep_seconds)
         end
       end
+
+      return @thread.alive?
     end
 
-    @thread.alive?
+    false
   end
 end
