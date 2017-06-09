@@ -3,7 +3,7 @@ services:
   google_dyn_dns:
     image: henryse/google_dyn_dns:latest
     ports:
-      - "8443"
+      - 8443
     volumes:
       - /var/lib/sslcerts:/usr/src/app/cert
       - $PWD/config:/usr/src/app/config
