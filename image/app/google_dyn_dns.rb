@@ -56,6 +56,6 @@ class GoogleDynDNS < Sinatra::Base
   end
 
   get '/' do
-    {hello: 'nothing to report'}.to_json
+    { last_update: GoogleDynDNSThread.instance.update_time.to_s }.to_json
   end
 end
