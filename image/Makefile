@@ -33,6 +33,7 @@ help: settings
 	@echo [INFO] This make process supports the following targets:
 	@echo [INFO]    clean     - Clean up and targets in project
 	@echo [INFO]    build     - Build both the project and Docker image
+	@echo [INFO]    compile   - Compile and run locally
 	@echo
 	@echo [INFO] The script supports the following parameters:
 	@echo [INFO] 	VERSION - version to tag docker image wth, default value is the git hash
@@ -53,7 +54,7 @@ clean: settings
 build: settings
 	@printf "\e[1;34m[INFO] [building $(project_name)]\e[00m\n\n"
 
-run: settings
+compile: settings
 	@printf "\e[1;34m[INFO] [building $(project_name)]\e[00m\n\n"
 	cd $(source_directory)/app; bundle
 	cd $(source_directory)/app; ruby build_version.rb --version=$(project_name)-$(project_version)
