@@ -31,13 +31,8 @@ settings: version
 help: settings
 	@printf "\e[1;34m[INFO] [information]\e[00m\n\n"
 	@echo [INFO] This make process supports the following targets:
-	@echo [INFO]    clean     - (chef, jenkins) clean up and targets in project
-	@echo [INFO]    build     - (chef, jenkins) build both the project and Docker image
-	@echo [INFO]    lint      - (chef) Example: JSLint, Lint etc...
-	@echo [INFO]    syntax    - (chef) Example: Checkstyle
-	@echo [INFO]    unit      - (chef) Example: Respec, Java Unit Test
-	@echo [INFO]    security  - (chef) Example: Fortify
-	@echo [INFO]    quality   - (chef) Run validate image.
+	@echo [INFO]    clean     - Clean up and targets in project
+	@echo [INFO]    build     - Build both the project and Docker image
 	@echo
 	@echo [INFO] The script supports the following parameters:
 	@echo [INFO] 	VERSION - version to tag docker image wth, default value is the git hash
@@ -57,21 +52,8 @@ clean: settings
 
 build: settings
 	@printf "\e[1;34m[INFO] [building $(project_name)]\e[00m\n\n"
+
+run: settings
+	@printf "\e[1;34m[INFO] [building $(project_name)]\e[00m\n\n"
 	cd $(source_directory)/app; bundle
 	cd $(source_directory)/app; ruby build_version.rb --version=$(project_name)-$(project_version)
-
-lint: settings
-	@printf "\e[1;34m[INFO] [linting $(project_name)]\e[00m\n\n"
-	@printf "\e[1;34m[WARNING] [linting $(project_name)]\e[00m\n\n"
-
-syntax: settings
-	@printf "\e[1;34m[INFO] [syntax check $(project_name)]\e[00m\n\n"
-	@printf "\e[1;34m[WARNING] [syntax check $(project_name)]\e[00m\n\n"
-
-unit: settings
-	@printf "\e[1;34m[INFO] [unit test $(project_name)]\e[00m\n\n"
-	@printf "\e[1;34m[WARNING] [unit test $(project_name)]\e[00m\n\n"
-
-security: settings
-	@printf "\e[1;34m[INFO] [security pass on $(project_name)]\e[00m\n\n"
-	@printf "\e[1;34m[WARNING] [security pass on $(project_name)]\e[00m\n\n"
