@@ -40,14 +40,13 @@ class GoogleDynDNSThread
   def success?
     @success
   end
-  # noinspection RubyResolve
-  def run
-    @success = false
-    @thread = Thread.new do
-      config = Config.new
-      if config.load(File.join(File.dirname(__FILE__), 'config', 'config.yml'))
-        request = "https://#{config.username}:#{config.password}@domains.google.com/nic/update?hostname=#{config.domain_name}"
 
+  def run
+    config = Config.new
+    @success = config.load(File.join(File.dirname(__FILE__), 'config', 'config.yml'))
+    if @success
+      request = "https://#{config.username}:#{config.password}@domains.google.com/nic/update?hostname=#{config.domain_name}"
+      @thread = Thread.new do
         while true
           response = RestClient.get(request)
 
@@ -65,7 +64,6 @@ class GoogleDynDNSThread
       end
     end
 
-    sleep 10
     alive?
   end
 end

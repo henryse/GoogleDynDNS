@@ -35,5 +35,5 @@ WORKDIR /usr/src/app
 RUN cd /usr/src/app/ \
     && bundle
 
-EXPOSE 8443
-CMD ["rackup", "-o 0.0.0.0", "-E production" ,"/usr/src/app/config.ru"]
+EXPOSE 8443 9080
+CMD ["rackup", "-o 0.0.0.0", "-E production" ,"/usr/src/app/config.ru", "-p 9080"]
