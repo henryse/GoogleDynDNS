@@ -2,4 +2,4 @@ dyndns:
   username: google_synthetic_DynDNS_username
   password:  google_synthetic_DynDNS_password
   domain_name: domain.name.to.update
-  seconds: time_in_seconds
+  sleep_seconds: time_in_seconds
