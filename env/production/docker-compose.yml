@@ -2,6 +2,7 @@ version: "2"
 services:
   google_dyn_dns:
     image: henryse/google_dyn_dns:latest
+    restart: always
     ports:
       - 8443
     volumes:
