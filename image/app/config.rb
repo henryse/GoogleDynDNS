@@ -1,4 +1,4 @@
-#**********************************************************************
+# **********************************************************************
 #    Copyright (c) 2017 Henry Seurer & Samuel Kelly
 #
 #    Permission is hereby granted, free of charge, to any person
@@ -22,12 +22,13 @@
 #    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #    OTHER DEALINGS IN THE SOFTWARE.
 #
-#**********************************************************************
+# **********************************************************************
 
 require 'yaml'
 require 'ostruct'
 require 'logger'
 
+# noinspection ALL
 class Config < OpenStruct
   def load(config_file)
     begin

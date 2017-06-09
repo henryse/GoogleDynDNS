@@ -1,4 +1,4 @@
-#**********************************************************************
+# **********************************************************************
 #    Copyright (c) 2017 Henry Seurer & Samuel Kelly
 #
 #    Permission is hereby granted, free of charge, to any person
@@ -22,7 +22,7 @@
 #    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #    OTHER DEALINGS IN THE SOFTWARE.
 #
-#**********************************************************************
+# **********************************************************************
 
 # config.ru (run with rackup)
 require_relative 'google_dyn_dns'
@@ -34,30 +34,30 @@ run GoogleDynDNS
 if File.exist?('/.dockerenv')
   Logger.new(STDOUT).info('Blue Pill: We are running in the matrix.')
   host = '0.0.0.0'
-  secure_port = 443
 else
   Logger.new(STDOUT).info('Red Pill: We are running in real world')
   host = 'localhost'
-  secure_port = 8443
 end
+secure_port = 8443
 
 dyn_dns = GoogleDynDNSThread.instance
 
 if dyn_dns.run
   # Run Secure Server
-  GoogleDynDNS.run!({host: host, port: secure_port}) do |server|
+  GoogleDynDNS.run!(host: host, port: secure_port) do |server|
     working_directory = File.expand_path File.dirname(__FILE__)
     ssl_options = {
-        :cert_chain_file => "#{working_directory}/cert/2829-applegate-wildcard.crt",
-        :private_key_file => "#{working_directory}/cert/2829-applegate-wildcard.key",
-        :verify_peer => false
+      cert_chain_file: "#{working_directory}/cert/2829-applegate-wildcard.crt",
+      private_key_file: "#{working_directory}/cert/2829-applegate-wildcard.key",
+      verify_peer: false
     }
     server.ssl = true
     server.ssl_options = ssl_options
   end
 else
-  Logger.new(STDERR).error('The processing thread is not running... exiting the program')
+  Logger.new(STDERR).error('The processing thread is not running...
+    exiting the program')
 end
 
-# use Rack::Static, :urls => ['/public'], :root => File.expand_path(File.dirname(__FILE__)) + '/public'
-
+# use Rack::Static, :urls => ['/public'],
+#     :root => File.expand_path(File.dirname(__FILE__)) + '/public'

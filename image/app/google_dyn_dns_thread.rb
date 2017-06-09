@@ -1,4 +1,4 @@
-#**********************************************************************
+# **********************************************************************
 #    Copyright (c) 2017 Henry Seurer & Samuel Kelly
 #
 #    Permission is hereby granted, free of charge, to any person
@@ -22,7 +22,7 @@
 #    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #    OTHER DEALINGS IN THE SOFTWARE.
 #
-#**********************************************************************
+# **********************************************************************
 
 require_relative 'config'
 require 'rest-client'
@@ -40,11 +40,9 @@ class GoogleDynDNSThread
   def success?
     @success
   end
-  
   # noinspection RubyResolve
   def run
     @success = false
-    
     @thread = Thread.new do
       config = Config.new
       if config.load(File.join(File.dirname(__FILE__), 'config', 'config.yml'))

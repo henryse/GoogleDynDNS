@@ -1,4 +1,4 @@
-#**********************************************************************
+# **********************************************************************
 #    Copyright (c) 2017 Henry Seurer & Samuel Kelly
 #
 #    Permission is hereby granted, free of charge, to any person
@@ -22,31 +22,30 @@
 #    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #    OTHER DEALINGS IN THE SOFTWARE.
 #
-#**********************************************************************
+# **********************************************************************
 
 require 'json'
 require 'fileutils'
 require 'optparse'
 require 'securerandom'
 
-version = SecureRandom.uuid.gsub! '-', ''
+version = SecureRandom.uuid.delete! '-'
 
 opt_parser = OptionParser.new do |opts|
   opts.banner = 'Usage: build_version.rb [options]'
 
-  opts.on('--version=VERSION', String, 'Version for this build, if none given then a random UUID will be generated.') do |item|
+  opts.on('--version=VERSION', String,
+          'Build version, default is random UUID will be generated.') do |item|
     version = item
   end
 end
 opt_parser.parse!
 
 build_date_time = Time.new.strftime '%Y-%m-%d_%H:%M:%S'
-json_object =  {:version => version, :build_time => build_date_time }
+json_object = { version: version, build_time: build_date_time }
 
 working_directory = File.expand_path File.dirname(__FILE__)
 
-file = File.open( "#{working_directory}/build_version.json", 'w')
+file = File.open("#{working_directory}/build_version.json", 'w')
 file.write(json_object.to_json.to_s)
 file.close
-
-

@@ -1,4 +1,4 @@
-#**********************************************************************
+# **********************************************************************
 #    Copyright (c) 2017 Henry Seurer & Samuel Kelly
 #
 #    Permission is hereby granted, free of charge, to any person
@@ -22,14 +22,14 @@
 #    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 #    OTHER DEALINGS IN THE SOFTWARE.
 #
-#**********************************************************************
+# **********************************************************************
 
 require 'sinatra/base'
 require_relative 'google_dyn_dns_thread'
 require 'json'
 
 class GoogleDynDNS < Sinatra::Base
-  def is_raspberry_pi
+  def raspberry_pi?
     !`uname -m`.index('arm').nil?
   end
 
