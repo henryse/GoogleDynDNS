@@ -3,7 +3,7 @@ services:
   google_dyn_dns:
     image: henryse/google_dyn_dns:latest
     ports:
-      - "8443:8443"
+      - "8443:9443"
     environment:
       - "HOST=$DOCKER_IP"
       - "LOGSTASH_ENABLED=false"
