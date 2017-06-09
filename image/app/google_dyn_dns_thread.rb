@@ -53,9 +53,11 @@ class GoogleDynDNSThread
 
           @success = response.code == 200
           if @success
-            Logger.new(STDOUT).info("Received #{response.code} connecting to domains.google.com/nic/update?hostname=#{config.domain_name}")
+            Logger.new(STDOUT).info(
+                "Received #{response.code} connecting to domains.google.com/nic/update?hostname=#{config.domain_name}")
           else
-            Logger.new(STDERR).error("Error #{response.code} connecting to domains.google.com/nic/update?hostname=#{config.domain_name}")
+            Logger.new(STDERR).error(
+                "Error #{response.code} connecting to domains.google.com/nic/update?hostname=#{config.domain_name}")
           end
 
           sleep(config.sleep_seconds)
