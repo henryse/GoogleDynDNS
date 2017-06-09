@@ -29,9 +29,12 @@ require 'rest-client'
 require 'logger'
 require 'thread'
 require 'singleton'
+require 'date'
 
 class GoogleDynDNSThread
   include Singleton
+
+  attr_reader :update_time
 
   def alive?
     @thread.alive?
@@ -49,7 +52,7 @@ class GoogleDynDNSThread
       @thread = Thread.new do
         while true
           response = RestClient.get(request)
-
+          @update_time = DateTime.now
           @success = response.code == 200
           if @success
             Logger.new(STDOUT).info(
