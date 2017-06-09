@@ -47,8 +47,8 @@ if dyn_dns.run
   GoogleDynDNS.run!(host: host, port: secure_port) do |server|
     working_directory = File.expand_path File.dirname(__FILE__)
     ssl_options = {
-      cert_chain_file: "#{working_directory}/cert/2829-applegate-wildcard.crt",
-      private_key_file: "#{working_directory}/cert/2829-applegate-wildcard.key",
+      cert_chain_file: "#{working_directory}/cert/https-wildcard.crt",
+      private_key_file: "#{working_directory}/cert/https-wildcard.key",
       verify_peer: false
     }
     server.ssl = true
