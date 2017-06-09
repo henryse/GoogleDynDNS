@@ -6,6 +6,7 @@ services:
       - "443"
     volumes:
       - /var/lib/sslcerts:/usr/src/app/cert
+      - $PWD/config:/usr/src/app/config
     environment:
       - "HOST=$DOCKER_IP"
       - "LOGSTASH_ENABLED=false"
