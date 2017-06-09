@@ -64,6 +64,6 @@ class GoogleDynDNSThread
       end
     end
 
-    alive?
+    @thread.alive?
   end
 end
