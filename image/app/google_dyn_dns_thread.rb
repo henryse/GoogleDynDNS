@@ -44,24 +44,31 @@ class GoogleDynDNSThread
     @success
   end
 
+  # noinspection RubyResolve
   def run
     config = Config.new
     @success = config.load(File.join(File.dirname(__FILE__), 'config', 'config.yml'))
     if @success
       request = "https://#{config.username}:#{config.password}@domains.google.com/nic/update?hostname=#{config.domain_name}"
       @thread = Thread.new do
-        while true
-          response = RestClient.get(request)
-          @update_time = DateTime.now
-          @success = response.code == 200
-          if @success
-            Logger.new(STDOUT).info(
-                "Received #{response.code} connecting to domains.google.com/nic/update?hostname=#{config.domain_name}")
-          else
+        loop do
+          begin
+            response = RestClient::Request.execute(method: :get,
+                                                   url: request,
+                                                   timeout: 120)
+            @success = response.code == 200
+            if @success
+              @update_time = DateTime.now
+              Logger.new(STDOUT).info(
+                  "Success, received #{response.code} while updating hostname #{config.domain_name}")
+            else
+              Logger.new(STDERR).error(
+                  "Error, received #{response.code} while updating hostname #{config.domain_name}")
+            end
+          rescue
             Logger.new(STDERR).error(
-                "Error #{response.code} connecting to domains.google.com/nic/update?hostname=#{config.domain_name}")
+                "Error, network connection issue hostname #{config.domain_name}")
           end
-
           sleep(config.sleep_seconds)
         end
       end
